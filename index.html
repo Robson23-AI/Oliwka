@@ -1,0 +1,264 @@
+<!-- UWAGA: pełny kod z responsywnym stylem -->
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cześć, jestem Oliwka</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #fffafc;
+      overflow-x: hidden;
+    }
+    section {
+      min-height: 100vh;
+      padding: 60px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease-in-out;
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 3rem;
+      color: #e75480;
+      text-align: center;
+    }
+    h2 {
+      font-weight: 600;
+      color: #444;
+    }
+    p {
+      font-size: 1.1rem;
+      color: #555;
+      max-width: 800px;
+      text-align: center;
+    }
+    #start-screen {
+      background: #fdeef4;
+      position: relative;
+    }
+    #start-screen button {
+      margin-top: 20px;
+      padding: 10px 30px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 20px;
+      background-color: #ffb6c1;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+    }
+    #start-screen button:hover {
+      transform: scale(1.05);
+    }
+    .floating-hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+      display: none;
+    }
+    .floating-hearts span {
+      position: absolute;
+      font-size: 24px;
+      animation: floatHeart 10s linear infinite;
+      opacity: 0.6;
+    }
+    @keyframes floatHeart {
+      0% { transform: translateY(-100vh) scale(1); opacity: 0.3; }
+      50% { transform: translateY(0) scale(1.2); opacity: 0.6; }
+      100% { transform: translateY(100vh) scale(0.9); opacity: 0; }
+    }
+    img {
+      max-width: 60%;
+      border-radius: 20px;
+      border: 4px solid #ffe4ec;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      transition: transform 0.4s, box-shadow 0.4s;
+      margin: 10px 0;
+    }
+    img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    }
+    .message-box {
+      margin-top: 20px;
+    }
+    input, textarea {
+      width: 90%;
+      max-width: 400px;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+    #heart-count {
+      font-size: 1.5rem;
+      margin-top: 10px;
+      color: #ff69b4;
+    }
+    canvas#confetti {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* 📱 Dodatkowo: styl mobilny */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+        padding: 0 10px;
+      }
+      h2 {
+        font-size: 1.2rem;
+        text-align: center;
+      }
+      p {
+        font-size: 1rem;
+        padding: 0 10px;
+      }
+      img {
+        max-width: 90%;
+      }
+      #start-screen button {
+        font-size: 1rem;
+        padding: 10px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <section id="start-screen" class="visible">
+    <canvas id="confetti"></canvas>
+    <h1>Cześć, jestem Oliwka!</h1>
+    <button onclick="startPresentation()">Rozpocznij opowieść</button>
+  </section>
+
+  <div class="floating-hearts" id="heart-container">
+    <script>
+      for (let i = 0; i < 30; i++) {
+        const span = document.createElement('span');
+        span.textContent = '❤️';
+        span.style.left = `${Math.random() * 100}%`;
+        span.style.animationDelay = `${Math.random() * 20}s`;
+        document.currentScript.parentElement.appendChild(span);
+      }
+    </script>
+  </div>
+
+  <!-- slajdy -->
+  <section><h2>To ja, Oliwka</h2><img src="img/pierwszefoto.jpg" alt="pierwsze zdjecie" /><p>Pierwszy uwieczniony krzyk</p></section>
+  <section><h2>Tutaj z moimi ukochanymi rodzicami</h2><img src="img/familia.jpg" alt="rodzina" /><p>Bardzo się kochamy</p></section>
+  <section><h2>A tu… gotujemy razem!</h2><img src="img/gotujemy.jpg" /><img src="img/gotujemy2.jpg" /><img src="img/gotujemy3.jpg" /><p>Razem gotujemy</p></section>
+  <section><h2>Pomagam też w pracy!</h2><img src="img/pracujemy.jpg" /><img src="img/pracujemy1.jpg" /><p>Razem pracujemy</p></section>
+  <section><h2>I potrafimy naprawdę odpoczywać</h2><img src="img/chillujemy.jpg" /><img src="img/spimy.jpg" /><p>Dużo chillujemy</p></section>
+  <section><h2>Czasem kibicujemy, częściej się śmiejemy</h2><img src="img/kibicujemy.jpg" /><img src="img/smiejemysie.jpg" /><p>...Kibicujemy i śmiejemy się</p></section>
+  <section><h2>Uczymy się i… lubimy się popisywać!</h2><img src="img/uczymysie.jpg" /><img src="img/pozujemy.jpg" /><p>Uczymy się i pozujemy</p></section>
+  <section><h2>A najlepsze miejsce na świecie? U mamy!</h2><img src="img/umamynajlepiej.jpg" /><p>U mamy najlepiej</p></section>
+  <section><h2>To już koniec naszej podróży!</h2><img src="img/lisek.jpg" /><p>Dziękuję, że jesteście ze mną w ten dzień. Wasza Oliwka</p></section>
+
+  <section>
+    <h2>Zostaw wiadomość dla Oliwki</h2>
+    <div class="message-box">
+      <input type="text" id="author" placeholder="Twoje imię" />
+      <textarea id="message" rows="4" placeholder="Twoja wiadomość..."></textarea>
+      <button onclick="addMessage()">Wyślij</button>
+      <div id="heart-count">❤️ 0</div>
+      <div id="messages"></div>
+    </div>
+  </section>
+
+  <audio id="bg-music" src="music/lullaby.mp3" loop></audio>
+
+  <script>
+    function startPresentation() {
+      document.getElementById('start-screen').style.display = 'none';
+      document.getElementById('heart-container').style.display = 'block';
+      document.getElementById('bg-music').play();
+      showVisibleSections();
+    }
+
+    function showVisibleSections() {
+      const sections = document.querySelectorAll('section');
+      let delay = 0;
+      sections.forEach((sec, i) => {
+        setTimeout(() => {
+          if (i !== 0) sec.classList.add('visible');
+        }, delay);
+        delay += 400;
+      });
+    }
+
+    let heartCount = 0;
+    function addMessage() {
+      const name = document.getElementById('author').value;
+      const msg = document.getElementById('message').value;
+      if (name && msg) {
+        const box = document.getElementById('messages');
+        const div = document.createElement('div');
+        div.innerHTML = `<p><strong>${name}:</strong> ${msg}</p>`;
+        box.appendChild(div);
+        heartCount++;
+        document.getElementById('heart-count').innerText = `❤️ ${heartCount}`;
+        document.getElementById('author').value = '';
+        document.getElementById('message').value = '';
+      }
+    }
+
+    const canvas = document.getElementById('confetti');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const pieces = [];
+    for (let i = 0; i < 100; i++) {
+      pieces.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height - canvas.height,
+        w: 10,
+        h: 10,
+        color: `hsl(${Math.random() * 360}, 70%, 60%)`,
+        speedY: Math.random() * 3 + 2,
+        speedX: (Math.random() - 0.5) * 2
+      });
+    }
+
+    function updateConfetti() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      pieces.forEach(p => {
+        p.y += p.speedY;
+        p.x += p.speedX;
+        if (p.y > canvas.height) p.y = 0;
+        ctx.fillStyle = p.color;
+        ctx.fillRect(p.x, p.y, p.w, p.h);
+      });
+      requestAnimationFrame(updateConfetti);
+    }
+
+    updateConfetti();
+  </script>
+</body>
+</html>
+
+
